@@ -1,0 +1,14 @@
+<img src={Astro.props.src} alt={Astro.props.alt} />
+
+<style>
+    img {
+        width: 2vw;
+        height: auto;
+        cursor: pointer;
+        filter: drop-shadow(0 0 0.2vh black);
+    }
+    img:hover {
+        transform: scale(1.2);
+        transition: transform 0.2s;
+    }
+</style>

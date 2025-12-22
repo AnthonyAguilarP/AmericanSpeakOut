@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="section-starter">
+        <slot></slot>
+    </div>
+    <div class="section-starter">
+
+    </div>
+    <div class="section">
+
+    </div>
+</div>
+
+<style>
+    .row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: auto;
+    }
+    .section {
+        flex: 1;
+    }
+    .section-starter {
+        width: 1.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible; /* permite que el contenido se salga */
+        position: relative;
+    }
+</style>
