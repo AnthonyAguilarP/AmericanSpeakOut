@@ -3,10 +3,7 @@
         <slot name="Start"/>
     </div>
     <div class="section">
-        <slot/>
-    </div>
-    <div class="section-border">
-        <slot name="End"/>
+        <slot name="Mid" />
     </div>
 </div>
 
@@ -21,11 +18,9 @@
         flex: 1;
     }
     .section-border {
-        width: 3vw;
+        width: 2.5vw;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: visible; /* permite que el contenido se salga */
-        position: relative;
     }
 </style>

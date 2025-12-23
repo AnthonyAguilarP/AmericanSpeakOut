@@ -1,11 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import TitleA from '../components/GenericsComponents/TitleA.astro';
+import H2A from '../components/GenericsComponents/H2A.astro';
 import RowA from '../components/GenericsComponents/RowA.astro';
 import ClickeableIconA from '../components/GenericsComponents/ClickeableIconA.astro';
 import CDA from '../assets/cd_a.png';
 import RowB from '../components/GenericsComponents/RowB.astro';
+import H3A from '../components/GenericsComponents/H3A.astro';
+import H4A from '../components/GenericsComponents/H4A.astro';
+import PA from '../components/GenericsComponents/PA.astro';
 
 const AltCDA = "CD Icon";
 ---
@@ -15,16 +18,112 @@ const AltCDA = "CD Icon";
         <section>
             <div class="left">
                 <RowA>
+                    <H2A slot="Mid" text="NUMBERS 1-10" />
+                </RowA>
+                
+                <RowA>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Start">
+                                <H3A text="1" />
+                            </div>
+                            <div slot="Mid">
+                                <H4A text="A" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Match the words in the box whith the numbers." />
+                            </div>
+                        </RowB>
+                    </div>
+                </RowA>
+                <RowA>
                     <div slot="Start">
                         <ClickeableIconA src={CDA.src} alt={AltCDA} />
                     </div>
-                    <TitleA text="NUMBERS 1-10" />
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Mid">
+                                <H4A text="B" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Listen and check. Then listen and repeat." />
+                            </div>
+                        </RowB>
+                    </div>
                 </RowA>
                 <RowA>
-                    <RowB>
-                        
-                    </RowB>
+                    <div slot="Start">
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                    </div>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Mid">
+                                <H4A text="C" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Listen and write the numbers." />
+                            </div>
+                        </RowB>
+                    </div>
                 </RowA>
+                <RowA>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Mid">
+                                <H4A text="D" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Work in pairs and take turns. Student: A say a number: Student B: say the next number:" />
+                            </div>
+                        </RowB>
+                    </div>
+                </RowA>
+                <RowA>
+                    <div slot="Start">
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                    </div>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Start">
+                                <H3A text="2" />
+                            </div>
+                            <div slot="Mid">
+                                <H4A text="A" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Match the words in the box with pictures 1-6." />
+                            </div>
+                        </RowB>
+                    </div>
+                </RowA>
+                <RowA>
+                    <div slot="Start">
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                    </div>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Mid">
+                                <H4A text="B" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Listen and check. Then listen and repeat." />
+                            </div>
+                        </RowB>
+                    </div>
+                </RowA>
+                <RowA>
+                    <div slot="Mid">
+                        <RowB>
+                            <div slot="Mid">
+                                <H4A text="C" />
+                            </div>
+                            <div slot="End">
+                                <PA text="Work on pairs. Write five more international words." />
+                            </div>
+                        </RowB>
+                    </div>
+                </RowA>
+
             </div>
             <div class="right">
                 <h1>Page b</h1>
