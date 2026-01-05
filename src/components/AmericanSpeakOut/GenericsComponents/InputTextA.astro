@@ -1,0 +1,65 @@
+---
+// Definimos las props que recibe el componente
+const { text = "", solutions = [] } = Astro.props;
+---
+
+<div class="input-container">
+    <input 
+        type="text" 
+        value={text} 
+        data-solutions={JSON.stringify(solutions)} 
+        class="custom-input"
+    />
+</div>
+
+<style>
+    .custom-input {
+        width: 100%; /* Ajusta según necesites */
+        height: 3vh;
+        font-size: 1.5vh;
+        box-sizing: border-box;
+        text-align: center;
+        
+        /* Solo línea negra abajo */
+        border: none;
+        border-bottom: 0.2vh solid black;
+        outline: none;
+        background: none;
+        
+        /* Color inicial */
+        color: black;
+        transition: color 0.3s ease;
+    }
+
+    /* Clases de estado */
+    .custom-input.correct {
+        color: blue;
+    }
+
+    .custom-input.incorrect {
+        color: red;
+    }
+</style>
+
+<script>
+    const inputs = document.querySelectorAll<HTMLInputElement>('.custom-input');
+
+    inputs.forEach(input => {
+        const solutions: string[] = JSON.parse(input.getAttribute('data-solutions') || '[]');
+
+        const validate = (val: string) => {
+            const cleanVal = val.trim();
+            if (cleanVal === "") {
+                input.classList.remove('correct', 'incorrect');
+            } else if (solutions.includes(cleanVal)) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+            }
+        };
+
+        input.addEventListener('input', () => validate(input.value));
+    });
+</script>

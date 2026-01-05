@@ -1,0 +1,21 @@
+---
+interface Props {
+  rows: number;
+  cols: number;
+}
+
+const { rows, cols } = Astro.props;
+---
+
+<style>
+  .grid {
+    display: grid;
+  }
+</style>
+
+<div 
+  class="grid" 
+  style={`grid-template-rows: repeat(${rows}, 1fr); grid-template-columns: repeat(${cols}, 1fr);`}
+>
+  <slot />
+</div>

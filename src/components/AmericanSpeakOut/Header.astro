@@ -1,0 +1,38 @@
+---
+import sound from '../../assets/sound.png';
+---
+<header>
+    <img src={sound.src} alt="Sound Icon">
+    <h1><span>LEAD IN</span></h1>
+</header>
+
+<style>
+    header {
+        display: flex;
+        height: 6vh;
+        width: 100%;
+        background: linear-gradient(
+            to right,
+            #d6e5e9  5%,
+            #36b0b9 95%
+        );
+        border-bottom: 0.5vh solid  #5cb4b4;
+        align-items: center;
+    }
+    h1 {
+        display: inline-block;
+        font-size: 3vh;
+        color:  #54949c ;
+        text-shadow: 
+            0.2vh 0.2vh 0 white,
+            -0.2vh 0.2vh 0 white,
+            0.2vh -0.2vh 0 white,
+            -0.2vh -0.2vh 0 white;
+    }
+    header img {
+        height: 3.5vh;
+        width: auto;
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+</style>

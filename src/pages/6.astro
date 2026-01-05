@@ -1,15 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import H2A from '../components/GenericsComponents/H2A.astro';
-import RowA from '../components/GenericsComponents/RowA.astro';
-import ClickeableIconA from '../components/GenericsComponents/ClickeableIconA.astro';
-import CDA from '../assets/cd_a.png';
-import RowB from '../components/GenericsComponents/RowB.astro';
-import H3A from '../components/GenericsComponents/H3A.astro';
-import H4A from '../components/GenericsComponents/H4A.astro';
-import PA from '../components/GenericsComponents/PA.astro';
+import { BooksComponent_6 } from '../registry/BooksRouter.js';
+import { AudiosComponent_6 } from '../registry/AudiosRouter.js';
+import { BooksPage_6 } from '../registry/AmericanSpeakOutStarter/6/BooksPage6.js';
 
+const A = BooksPage_6.A;
+
+// Components
+const Header = BooksComponent_6.Header;
+const RowA = BooksComponent_6.RowA;
+const H2A = BooksComponent_6.H2A;
+const ClickeableIconA = BooksComponent_6.ClickeableIconA;
+const RowB = BooksComponent_6.RowB;
+const H3A = BooksComponent_6.H3A;
+const H4A = BooksComponent_6.H4A;
+const H4B = BooksComponent_6.H4B;
+const H5A = BooksComponent_6.H5A;
+const ULA = BooksComponent_6.ULA;
+const LIA = BooksComponent_6.LIA;
+const InputTextA = BooksComponent_6.InputTextA;
+const GridA = BooksComponent_6.GridA;
+
+// Audios
+const SL1 = AudiosComponent_6.SL1;
+const SL2 = AudiosComponent_6.SL2;
+const SL3 = AudiosComponent_6.SL3;
+
+// Images
+import CDA from '../assets/cd_a.png';
+import Audio from '../assets/Aerosmith - Crazy (Official Music Video) - AerosmithVEVO (youtube).mp3';
+
+// Alt texts
 const AltCDA = "CD Icon";
 ---
 <Layout>
@@ -21,24 +42,11 @@ const AltCDA = "CD Icon";
                     <H2A slot="Mid" text="NUMBERS 1-10" />
                 </RowA>
                 
-                <RowA>
-                    <div slot="Mid">
-                        <RowB>
-                            <div slot="Start">
-                                <H3A text="1" />
-                            </div>
-                            <div slot="Mid">
-                                <H4A text="A" />
-                            </div>
-                            <div slot="End">
-                                <PA text="Match the words in the box whith the numbers." />
-                            </div>
-                        </RowB>
-                    </div>
-                </RowA>
+                <A/>
+
                 <RowA>
                     <div slot="Start">
-                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} audio={SL1} />
                     </div>
                     <div slot="Mid">
                         <RowB>
@@ -46,14 +54,14 @@ const AltCDA = "CD Icon";
                                 <H4A text="B" />
                             </div>
                             <div slot="End">
-                                <PA text="Listen and check. Then listen and repeat." />
+                                <H5A text="Listen and check. Then listen and repeat." />
                             </div>
                         </RowB>
                     </div>
                 </RowA>
                 <RowA>
                     <div slot="Start">
-                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} audio={SL2} />
                     </div>
                     <div slot="Mid">
                         <RowB>
@@ -61,7 +69,7 @@ const AltCDA = "CD Icon";
                                 <H4A text="C" />
                             </div>
                             <div slot="End">
-                                <PA text="Listen and write the numbers." />
+                                <H5A text="Listen and write the numbers." />
                             </div>
                         </RowB>
                     </div>
@@ -73,14 +81,14 @@ const AltCDA = "CD Icon";
                                 <H4A text="D" />
                             </div>
                             <div slot="End">
-                                <PA text="Work in pairs and take turns. Student: A say a number: Student B: say the next number:" />
+                                <H5A text="Work in pairs and take turns. Student: A say a number: Student B: say the next number:" />
                             </div>
                         </RowB>
                     </div>
                 </RowA>
                 <RowA>
                     <div slot="Start">
-                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} audio={SL3} />
                     </div>
                     <div slot="Mid">
                         <RowB>
@@ -91,14 +99,14 @@ const AltCDA = "CD Icon";
                                 <H4A text="A" />
                             </div>
                             <div slot="End">
-                                <PA text="Match the words in the box with pictures 1-6." />
+                                <H5A text="Match the words in the box with pictures 1-6." />
                             </div>
                         </RowB>
                     </div>
                 </RowA>
                 <RowA>
                     <div slot="Start">
-                        <ClickeableIconA src={CDA.src} alt={AltCDA} />
+                        <ClickeableIconA src={CDA.src} alt={AltCDA} audio={Audio} />
                     </div>
                     <div slot="Mid">
                         <RowB>
@@ -106,7 +114,7 @@ const AltCDA = "CD Icon";
                                 <H4A text="B" />
                             </div>
                             <div slot="End">
-                                <PA text="Listen and check. Then listen and repeat." />
+                                <H5A text="Listen and check. Then listen and repeat." />
                             </div>
                         </RowB>
                     </div>
@@ -118,7 +126,7 @@ const AltCDA = "CD Icon";
                                 <H4A text="C" />
                             </div>
                             <div slot="End">
-                                <PA text="Work on pairs. Write five more international words." />
+                                <H5A text="Work on pairs. Write five more international words." />
                             </div>
                         </RowB>
                     </div>
@@ -134,7 +142,7 @@ const AltCDA = "CD Icon";
 
 <style>
     main {
-        height: 100vh;
+        min-height: 100vh;
         width: 75vh;
         background-color: #d6e5e9;
     }

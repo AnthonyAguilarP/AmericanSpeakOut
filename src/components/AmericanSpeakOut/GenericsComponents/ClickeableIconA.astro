@@ -1,0 +1,160 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  audio: string;
+}
+
+const { src, alt, audio } = Astro.props;
+---
+
+<div class="audio-wrapper">
+  <div class="container" data-audio-src={audio}>
+    <svg class="progress-ring">
+      <circle
+        class="progress-ring__circle"
+        stroke="white"
+        stroke-width="2"
+        fill="transparent"
+      ></circle>
+    </svg>
+    <img src={src} alt={alt} class="icon-trigger" />
+  </div>
+</div>
+
+<style>
+  .audio-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 1vh;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 1.8vw;
+    height: 1.8vw;
+  }
+
+  .icon-trigger {
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    filter: drop-shadow(0 0 0.2vh black);
+    transition: transform 0.2s;
+  }
+
+  .progress-ring {
+    position: absolute;
+    width: 2.4vw; 
+    height: 2.4vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .progress-ring__circle {
+    transition: stroke-dashoffset 0.1s linear;
+    stroke-linecap: round;
+  }
+
+  .container.playing .progress-ring {
+    opacity: 1;
+  }
+
+  .container:hover .icon-trigger {
+    transform: scale(1.1);
+  }
+</style>
+
+<script>
+  // Variables globales dentro del scope del script para rastrear el audio activo
+  let currentAudio: HTMLAudioElement | null = null;
+  let currentContainer: HTMLElement | null = null;
+
+  function setupAudioProgress() {
+    const containers = document.querySelectorAll('.container');
+
+    containers.forEach(container => {
+      const htmlContainer = container as HTMLElement;
+      const audioSrc = htmlContainer.getAttribute('data-audio-src');
+      const svg = htmlContainer.querySelector('.progress-ring') as SVGElement;
+      const circle = htmlContainer.querySelector('.progress-ring__circle') as SVGCircleElement;
+      
+      const updateSize = () => {
+        const size = svg.clientWidth;
+        const center = size / 2;
+        const radius = center - 2;
+        const circumference = radius * 2 * Math.PI;
+
+        circle.setAttribute('cx', center.toString());
+        circle.setAttribute('cy', center.toString());
+        circle.setAttribute('r', radius.toString());
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        return circumference;
+      };
+
+      let circumference = updateSize();
+      // Creamos la instancia de audio pero no la asignamos a la global todavía
+      let audioInstance = new Audio(audioSrc!);
+
+      htmlContainer.addEventListener('click', () => {
+        // 1. Si el audio que se clica es el que ya está sonando: Pausar y resetear
+        if (currentAudio === audioInstance) {
+          audioInstance.pause();
+          audioInstance.currentTime = 0;
+          htmlContainer.classList.remove('playing');
+          currentAudio = null;
+          currentContainer = null;
+          return;
+        }
+
+        // 2. Si hay OTRO audio sonando: Detenerlo y limpiar su contenedor
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+          currentContainer?.classList.remove('playing');
+          // Resetear visualmente el círculo del audio anterior
+          const oldCircle = currentContainer?.querySelector('.progress-ring__circle') as HTMLElement;
+          if (oldCircle) oldCircle.style.strokeDashoffset = oldCircle.style.strokeDasharray.split(' ')[0];
+        }
+
+        // 3. Reproducir el nuevo audio
+        audioInstance.play();
+        htmlContainer.classList.add('playing');
+        
+        // Actualizar las referencias globales
+        currentAudio = audioInstance;
+        currentContainer = htmlContainer;
+
+        audioInstance.ontimeupdate = () => {
+          const progress = audioInstance.currentTime / audioInstance.duration;
+          const offset = circumference - progress * circumference;
+          circle.style.strokeDashoffset = offset.toString();
+        };
+
+        audioInstance.onended = () => {
+          htmlContainer.classList.remove('playing');
+          circle.style.strokeDashoffset = circumference.toString();
+          if (currentAudio === audioInstance) {
+            currentAudio = null;
+            currentContainer = null;
+          }
+        };
+      });
+
+      window.addEventListener('resize', () => { circumference = updateSize(); });
+    });
+  }
+
+  // Ejecución inicial y soporte para transiciones de página
+  setupAudioProgress();
+  document.addEventListener('astro:page-load', setupAudioProgress);
+</script>
