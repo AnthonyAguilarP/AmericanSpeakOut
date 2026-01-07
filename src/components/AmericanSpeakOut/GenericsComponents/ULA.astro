@@ -2,11 +2,54 @@
     <slot />
 </ul>
 
+<script>
+    // Orden de prioridad maestro
+    const masterOrder = ["nine", "eight", "seven", "six", "five", "four", "three", "two", "one", "zero"];
+    let currentSelection = [];
+
+    const items = document.querySelectorAll('.selectable');
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const val = item.getAttribute('data-value');
+
+            if (currentSelection.includes(val)) {
+                // Deseleccionar
+                currentSelection = currentSelection.filter(i => i !== val);
+                item.classList.remove('correct', 'incorrect');
+                // Re-validar los que quedan por si cambió su validez de posición
+                reValidateAll();
+            } else {
+                // Seleccionar
+                currentSelection.push(val);
+                applyValidation(item, val, currentSelection.length - 1);
+            }
+        });
+    });
+
+    function applyValidation(element, value, index) {
+        // Limpiamos clases previas
+        element.classList.remove('correct', 'incorrect');
+
+        // Validamos contra el masterOrder
+        if (value === masterOrder[index]) {
+            element.classList.add('correct');
+        } else {
+            element.classList.add('incorrect');
+        }
+    }
+
+    function reValidateAll() {
+        currentSelection.forEach((val, index) => {
+            const element = document.querySelector(`[data-value="${val}"]`);
+            if (element) applyValidation(element, val, index);
+        });
+    }
+</script>
+
 <style>
     ul {
-        /* Esta propiedad hace que el borde sea interno */
         box-sizing: border-box;
-
         display: flex;
         flex-wrap: wrap; 
         align-items: center;
@@ -14,7 +57,7 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
-        width: 100%; /* Ahora el 100% incluye el borde */
+        width: 100%;
         background-color: bisque;
         border: 0.3vh solid #caa06d;
     }
