@@ -3,48 +3,16 @@
 </ul>
 
 <script>
-    // Orden de prioridad maestro
+    import { SetupItemSelection } from "../../../utilities/SetupItemSelection";
+
     const masterOrder = ["nine", "eight", "seven", "six", "five", "four", "three", "two", "one", "zero"];
-    let currentSelection = [];
+    // Usamos const porque el array siempre será el mismo objeto (aunque cambie su contenido)
+    const currentSelection = []; 
 
     const items = document.querySelectorAll('.selectable');
 
-    items.forEach(item => {
-        item.addEventListener('click', () => {
-            const val = item.getAttribute('data-value');
-
-            if (currentSelection.includes(val)) {
-                // Deseleccionar
-                currentSelection = currentSelection.filter(i => i !== val);
-                item.classList.remove('correct', 'incorrect');
-                // Re-validar los que quedan por si cambió su validez de posición
-                reValidateAll();
-            } else {
-                // Seleccionar
-                currentSelection.push(val);
-                applyValidation(item, val, currentSelection.length - 1);
-            }
-        });
-    });
-
-    function applyValidation(element, value, index) {
-        // Limpiamos clases previas
-        element.classList.remove('correct', 'incorrect');
-
-        // Validamos contra el masterOrder
-        if (value === masterOrder[index]) {
-            element.classList.add('correct');
-        } else {
-            element.classList.add('incorrect');
-        }
-    }
-
-    function reValidateAll() {
-        currentSelection.forEach((val, index) => {
-            const element = document.querySelector(`[data-value="${val}"]`);
-            if (element) applyValidation(element, val, index);
-        });
-    }
+    // Pasamos tanto el array como el orden maestro
+    SetupItemSelection(items, currentSelection, masterOrder);
 </script>
 
 <style>

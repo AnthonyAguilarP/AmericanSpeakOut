@@ -1,6 +1,8 @@
 ---
 import { BooksComponent_6 } from '../../../../../registry/AmericanSpeakOutStarter/6/BooksComponent_6.js';
 const { RowA, RowB, H3A, H4A, H4B, H5A, ULA, LIA, InputTextA, GridA } = BooksComponent_6;
+
+const NumberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 ---
 
 <RowA>
@@ -13,7 +15,7 @@ const { RowA, RowB, H3A, H4A, H4B, H5A, ULA, LIA, InputTextA, GridA } = BooksCom
                 <H4A text="A" />
             </div>
             <div slot="End">
-                <H5A text="Match the words in the box whith the numbers." />
+                <H5A text="Match the words in the box with the numbers." />
             </div>
         </RowB>
     </div>
@@ -21,17 +23,17 @@ const { RowA, RowB, H3A, H4A, H4B, H5A, ULA, LIA, InputTextA, GridA } = BooksCom
                 <RowA>
                     <div slot="Mid">
                         <ULA>
-                            <LIA text="zero" />
-                            <LIA text="nine" />
-                            <LIA text="three" />
-                            <LIA text="one" />
-                            <LIA text="seven" />
-                            <LIA text="ten" />
-                            <LIA text="four" />
-                            <LIA text="two" />
-                            <LIA text="eight" />
-                            <LIA text="five" />
-                            <LIA text="six" />
+                            <LIA text={NumberWords[0]} />
+                            <LIA text={NumberWords[9]} />
+                            <LIA text={NumberWords[3]} />
+                            <LIA text={NumberWords[1]} />
+                            <LIA text={NumberWords[7]} />
+                            <LIA text={NumberWords[10]} />
+                            <LIA text={NumberWords[4]} />
+                            <LIA text={NumberWords[2]} />
+                            <LIA text={NumberWords[8]} />
+                            <LIA text={NumberWords[5]} />
+                            <LIA text={NumberWords[6]} />
                         </ULA>
                     </div>
                 </RowA>
