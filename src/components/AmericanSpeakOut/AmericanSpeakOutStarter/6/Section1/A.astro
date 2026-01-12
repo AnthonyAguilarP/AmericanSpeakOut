@@ -1,8 +1,10 @@
 ---
+import { ReorderArray } from '@Utilities/ReorderArray.js';
 import { BooksComponent_6 } from '../../../../../registry/AmericanSpeakOutStarter/6/BooksComponent_6.js';
 const { RowA, RowB, H3A, H4A, H4B, H5A, ULA, LIA, InputTextA, GridA } = BooksComponent_6;
 
 const NumberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const NewReorderArray = ReorderArray(NumberWords, [3,7,1,9,0,6,4,8,2,10,5]);
 ---
 
 <RowA>
@@ -19,115 +21,46 @@ const NumberWords = ["zero", "one", "two", "three", "four", "five", "six", "seve
             </div>
         </RowB>
     </div>
-                </RowA>
-                <RowA>
+</RowA>
+<RowA>
+    <div slot="Mid">
+        <ULA masterOrder={NumberWords}>
+            {NewReorderArray.map(item => (
+                <LIA text={item} />
+            ))}
+            <script>
+                import { SetupItemSelection } from "../../../../../utilities/SetupItemSelection.js";
+                // Definimos un helper para querySelectorAll
+                const $$ = (sel : any) => document.querySelectorAll(sel);
+
+                $$('.ula-container').forEach(container => {
+                    const masterOrder = JSON.parse(container.getAttribute('data-master'));
+                    const currentSelection : any = [];
+                    
+                    // Buscamos los items SOLO dentro de este contenedor
+                    // Asegúrate de que LIA renderice la clase 'selectable'
+                    const items = container.querySelectorAll('.selectable');
+
+                    SetupItemSelection(items, currentSelection, masterOrder);
+                });
+            </script>
+        </ULA>
+    </div>
+</RowA>
+<RowA>
+    <div slot="Mid">
+        <GridA rows={4} cols={3}>
+            {NumberWords.map((item, index) => (
+                <RowB>
                     <div slot="Mid">
-                        <ULA>
-                            <LIA text={NumberWords[0]} />
-                            <LIA text={NumberWords[9]} />
-                            <LIA text={NumberWords[3]} />
-                            <LIA text={NumberWords[1]} />
-                            <LIA text={NumberWords[7]} />
-                            <LIA text={NumberWords[10]} />
-                            <LIA text={NumberWords[4]} />
-                            <LIA text={NumberWords[2]} />
-                            <LIA text={NumberWords[8]} />
-                            <LIA text={NumberWords[5]} />
-                            <LIA text={NumberWords[6]} />
-                        </ULA>
+                        <H4B text={index+"."} />
                     </div>
-                </RowA>
-                <RowA>
-                    <div slot="Mid">
-                        <GridA rows={4} cols={3}>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="0." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA text="zero" solutions={["zero"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="1." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["one"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="2." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["two"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="3." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["three"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="4." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["four"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="5." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["five"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="6." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["six"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="7." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["seven"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="8." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["eight"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="9." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["nine"]} />
-                                </div>
-                            </RowB>
-                            <RowB>
-                                <div slot="Mid">
-                                    <H4B text="10." />
-                                </div>
-                                <div slot="End">
-                                    <InputTextA solutions={["ten"]} />
-                                </div>
-                            </RowB>
-                        </GridA>
+                    <div slot="End">
+                        <InputTextA text="" solutions={[item]} />
                     </div>
-                </RowA>
+                </RowB>
+            ))}
+            
+        </GridA>
+    </div>
+</RowA>

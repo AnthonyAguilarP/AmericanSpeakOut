@@ -7,7 +7,8 @@ export default defineConfig({
         resolve: {
             alias: {
                 '@GenericsComponents': '/src/components/AmericanSpeakOut/GenericsComponents',
-                '@AmericanSpeakOutStarterComponents': '/src/components/AmericanSpeakOut/AmericanSpeakOutStarter'
+                '@AmericanSpeakOutStarterComponents': '/src/components/AmericanSpeakOut/AmericanSpeakOutStarter',
+                '@Utilities': '/src/utilities',
             }
         }
     }

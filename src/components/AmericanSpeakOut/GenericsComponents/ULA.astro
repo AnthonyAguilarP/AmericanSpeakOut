@@ -1,19 +1,11 @@
-<ul>
+---
+// Recibimos masterOrder por props
+const { masterOrder } = Astro.props;
+---
+
+<ul class="ula-container" data-master={JSON.stringify(masterOrder)}>
     <slot />
 </ul>
-
-<script>
-    import { SetupItemSelection } from "../../../utilities/SetupItemSelection";
-
-    const masterOrder = ["nine", "eight", "seven", "six", "five", "four", "three", "two", "one", "zero"];
-    // Usamos const porque el array siempre será el mismo objeto (aunque cambie su contenido)
-    const currentSelection = []; 
-
-    const items = document.querySelectorAll('.selectable');
-
-    // Pasamos tanto el array como el orden maestro
-    SetupItemSelection(items, currentSelection, masterOrder);
-</script>
 
 <style>
     ul {
